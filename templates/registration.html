@@ -1,0 +1,65 @@
+{% extends "main.html" %}
+
+{% block style %}
+    .auth-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height */
+        background-color: #f8f9fa; /* Light background for contrast */
+    }
+
+    .auth-box {
+        width: 400px;
+        padding: 20px;
+        background: white;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .auth-box h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .auth-box .form-control {
+        margin-bottom: 15px;
+    }
+
+    .auth-box .btn-primary {
+        width: 100%;
+    }
+
+    .auth-box a {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .auth-box a:hover {
+        text-decoration: underline;
+    }
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-box">
+        <h2>Register</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" class="form-control" placeholder="Name" name="username" required>
+            <input type="email" class="form-control" placeholder="Email" name="email" required>
+            <input type="password" class="form-control" placeholder="Password" name="password" required>
+            <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required>
+            <button type="submit" class="btn btn-primary">Register</button>
+            {% for message in messages  %}
+                <p class="alert alert-danger m-2">{{message}}</p>
+            {% endfor %}
+            <p class = "mt-3 text-center">Already have an account? <a href="{% url 'login-page' %}">Login here</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}
